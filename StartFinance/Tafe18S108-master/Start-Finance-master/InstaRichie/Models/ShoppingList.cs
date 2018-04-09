@@ -21,7 +21,7 @@ namespace StartFinance.Models
         [NotNull]
         public string NameOfItem { get; set; }
 
-        public DateTime ShoppingDate { get; set; }
+        public string ShoppingDate { get; set; }
 
         [NotNull]
         public double PriceQuoted { get; set; }
