@@ -99,7 +99,7 @@
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
             <!-- Apointment button -->
-              <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:WishListPage" 
+              <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:AppointmentPage" 
                                           AutomationProperties.Name="Jerry"
                                           >
                 <StackPanel Orientation="Horizontal">
