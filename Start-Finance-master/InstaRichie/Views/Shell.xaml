@@ -14,6 +14,31 @@
     <Controls:HamburgerMenu x:Name="MyHamburgerMenu">
 
         <Controls:HamburgerMenu.PrimaryButtons>
+
+            <!--  ContactDetails button  -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:DebtPage" 
+                                          AutomationProperties.Name="Jerry"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="ProtectedDocument" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Debts" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:ContacDetails2" 
+                                          AutomationProperties.Name="Jerry"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
+                                Symbol="Contact" />
+                    <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
+                               Text="Contact Details" />
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+
+
             <!--  DashBoard button  -->
             <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:DashBoardPage" 
                                           AutomationProperties.Name="Jerry"
