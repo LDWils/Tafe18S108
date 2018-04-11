@@ -56,12 +56,14 @@ namespace StartFinance.Views
             Results();
         }
 
+       
+
         public string FinalDate()
         {
             string CDay = dobTxt.Date.Value.Day.ToString();
             string CMonth = dobTxt.Date.Value.Month.ToString();
             string CYear = dobTxt.Date.Value.Year.ToString();
-            string EndDate = "" + CMonth + "/" + CDay + "/" + CYear;
+            string EndDate = "" + CDay+ "/" + CMonth + "/" + CYear;
 
             return EndDate;
         }
@@ -112,6 +114,7 @@ namespace StartFinance.Views
             try
             {
                 string listSeleccted = ((PersonalInfo)PersonalInfoView.SelectedItem).FirstName;
+                int idSelected = ((PersonalInfo)PersonalInfoView.SelectedItem).PersonalID;
                 if (listSeleccted == "")
                 {
                     MessageDialog dialog = new MessageDialog("Not selected the List", "Oops..!");
@@ -121,7 +124,7 @@ namespace StartFinance.Views
                 {
                     conn.CreateTable<PersonalInfo>();
                     var query1 = conn.Table<PersonalInfo>();
-                    var query3 = conn.Query<PersonalInfo>("DELETE FROM Personal Info WHERE PersonalID ='" + listSeleccted + "'");
+                    var query3 = conn.Query<PersonalInfo>("DELETE FROM PersonalInfo WHERE PersonalID ='" + idSelected + "'");
                     PersonalInfoView.ItemsSource = query1.ToList();
                 }
             }
@@ -158,8 +161,7 @@ namespace StartFinance.Views
 
         private async void EditInfo_Click(object sender, RoutedEventArgs e)
         {
-            DateTime birthDate = DateTime.Parse(((PersonalInfo)PersonalInfoView.SelectedItem).DOB);
-
+            
             if (PersonalInfoView.SelectedIndex == -1)
             {
                 MessageDialog dialog = new MessageDialog("No selected event", "Oops..!");
@@ -173,8 +175,11 @@ namespace StartFinance.Views
                 emailTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Email;
                 phoneTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Phone;
                 genderTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Gender;
-                this.dobTxt.Date = birthDate;
+                //  dobTxt.Text = FinalDate;
+               // string finDate = FinalDate();
+              //  dobTxt. = Convert.ToInt32(finDate.Substring(3, 4);
               
+
                 editbtn.Visibility = Visibility.Collapsed;
                 savebtn.Visibility = Visibility.Visible;
             }

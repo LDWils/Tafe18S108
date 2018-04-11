@@ -30,47 +30,47 @@
 
 
 
-   
-        <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
-                    <VisualState x:Name="VisualStateNarrow">
-                        <VisualState.StateTriggers>
-                            <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
-                        </VisualState.StateTriggers>
-                        <VisualState.Setters>
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
 
                     </VisualState.Setters>
                 </VisualState>
-               
+
 
                 <VisualState x:Name="VisualStateNormal">
-                        <VisualState.StateTriggers>
-                            <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
-                        </VisualState.StateTriggers>
-                        <VisualState.Setters>
-                            <!--  TODO: change properties for normal view  -->
-                            <!--<Setter Target="AccDataGrid.(RelativePanel.RightOf)" Value="pageStart" />-->
-                        </VisualState.Setters>
-                    </VisualState>
-                    <VisualState x:Name="VisualStateWide">
-                        <VisualState.StateTriggers>
-                            <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
-                        </VisualState.StateTriggers>
-                        <VisualState.Setters>
-                            <!--  TODO: change properties for wide view  -->
-                            <!--<Setter Target="AccDataGrid.(RelativePanel.RightOf)" Value="pageStart" />-->
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for normal view  -->
+                        <!--<Setter Target="AccDataGrid.(RelativePanel.RightOf)" Value="pageStart" />-->
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--  TODO: change properties for wide view  -->
+                        <!--<Setter Target="AccDataGrid.(RelativePanel.RightOf)" Value="pageStart" />-->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
 
         <controls:PageHeader x:Name="pageHeader" RelativePanel.AlignLeftWithPanel="True"
 			RelativePanel.AlignRightWithPanel="True"
 			RelativePanel.AlignTopWithPanel="True" Text="Add Personal Info">
 
             <!--  secondary commands  -->
-           <!--
+            <!--
             <controls:PageHeader.SecondaryCommands>
                 <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" Label="Settings" />
                 <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacy" />
@@ -83,25 +83,25 @@
         <controls:PageHeader x:Name="pageFooter" RelativePanel.AlignLeftWithPanel="True"
 			RelativePanel.AlignRightWithPanel="True"
 			RelativePanel.AlignBottomWithPanel="True">
-                <!--  secondary commands  -->
-                <controls:PageHeader.PrimaryCommands>
+            <!--  secondary commands  -->
+            <controls:PageHeader.PrimaryCommands>
                 <AppBarButton x:Name="add" Icon="Add" Label="Add Info" Click="AddInfo_Click"/>
                 <AppBarButton x:Name="editbtn" Icon="Edit" Label="Edit Info" Click="EditInfo_Click"/>
                 <AppBarButton x:Name="delete" Icon="Delete" Label="Delete Info" Click="DeleteInfo_Click"/>
                 <AppBarButton x:Name="savebtn" Icon="Accept" Label="Accept Change" Click="AcceptChange_Click" Visibility="Collapsed"/>
             </controls:PageHeader.PrimaryCommands>
 
-            </controls:PageHeader>
+        </controls:PageHeader>
 
 
         <!--  page content  -->
         <Pivot>
             <RelativePanel.Below>pageHeader</RelativePanel.Below>
             <RelativePanel.Above>pageFooter</RelativePanel.Above>
-            <PivotItem Header="Shopping List">
+            <PivotItem Header="Personal Info">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="300"/>
+                        <RowDefinition Height="450"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel x:Name="pageStart" Grid.Row="0" VerticalAlignment="Top"
