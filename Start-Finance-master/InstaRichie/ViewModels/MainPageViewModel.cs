@@ -57,6 +57,9 @@ namespace StartFinance.ViewModels
         public void GotoAbout() =>
             NavigationService.Navigate(typeof(Views.SettingsPage), 2);
 
+        public void GoToShoppingList() =>
+            NavigationService.Navigate(typeof(Views.ShoppingListPage), 3);
+
     }
 }
 

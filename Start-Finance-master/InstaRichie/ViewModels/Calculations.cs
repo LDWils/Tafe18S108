@@ -219,7 +219,7 @@ namespace StartFinance.ViewModels
                 return output;
             }
         }
-
+        
         public string CreditRatio()
         {
             string CreditRating;

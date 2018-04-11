@@ -36,6 +36,9 @@ namespace StartFinance.Views
             conn.DropTable<Transactions>();
             conn.DropTable<WishList>();
             conn.DropTable<Category>();
+
+            //Drop table of shopping list @Author Leon Wilson
+            conn.DropTable<ShoppingList>();
         }
 
         private void BusyTextTextBox_TextChanged(object sender, TextChangedEventArgs e)
