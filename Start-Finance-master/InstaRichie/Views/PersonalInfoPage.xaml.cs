@@ -175,9 +175,7 @@ namespace StartFinance.Views
                 emailTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Email;
                 phoneTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Phone;
                 genderTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Gender;
-                //  dobTxt.Text = FinalDate;
-               // string finDate = FinalDate();
-              //  dobTxt. = Convert.ToInt32(finDate.Substring(3, 4);
+           
               
 
                 editbtn.Visibility = Visibility.Collapsed;
