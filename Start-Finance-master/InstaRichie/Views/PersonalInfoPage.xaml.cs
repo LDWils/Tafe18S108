@@ -146,7 +146,7 @@ namespace StartFinance.Views
             string num = phoneTxt.Text;
             string bday = FinalDate();
             string gen = genderTxt.Text;
-
+            
 
             var queryedit = conn.Query<PersonalInfo>("UPDATE PersonalInfo SET FirstName = '" + first +
                           "', LastName = '" + last + "', Email = '" + mail + "', Phone = '" + num +
@@ -175,8 +175,9 @@ namespace StartFinance.Views
                 emailTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Email;
                 phoneTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Phone;
                 genderTxt.Text = ((PersonalInfo)PersonalInfoView.SelectedItem).Gender;
-           
-              
+                DateTime birthDate = DateTime.Parse(((PersonalInfo)PersonalInfoView.SelectedItem).DOB);
+                this.dobTxt.Date = birthDate;
+
 
                 editbtn.Visibility = Visibility.Collapsed;
                 savebtn.Visibility = Visibility.Visible;
