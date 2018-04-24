@@ -111,31 +111,44 @@ namespace StartFinance.Views
 
         private async void DeleteInfo_Click(object sender, RoutedEventArgs e)
         {
-            try
+            MessageDialog ShowConf = new MessageDialog("Are you sure?", "Important");
+            ShowConf.Commands.Add(new UICommand("Yes, Delete")
             {
-                string listSeleccted = ((PersonalInfo)PersonalInfoView.SelectedItem).FirstName;
-                int idSelected = ((PersonalInfo)PersonalInfoView.SelectedItem).PersonalID;
-                if (listSeleccted == "")
-                {
-                    MessageDialog dialog = new MessageDialog("Not selected the List", "Oops..!");
-                    await dialog.ShowAsync();
-                }
-                else
-                {
-                    conn.CreateTable<PersonalInfo>();
-                    var query1 = conn.Table<PersonalInfo>();
-                    var query3 = conn.Query<PersonalInfo>("DELETE FROM PersonalInfo WHERE PersonalID ='" + idSelected + "'");
-                    PersonalInfoView.ItemsSource = query1.ToList();
-                }
-            }
-            catch (NullReferenceException)
+                Id = 0
+            });
+            ShowConf.Commands.Add(new UICommand("Cancel")
             {
-                MessageDialog dialog = new MessageDialog(" Info Not selected from list", "Oops..!");
-                await dialog.ShowAsync();
-            }
-        }
+                Id = 1
+            });
+            ShowConf.DefaultCommandIndex = 0;
+            ShowConf.CancelCommandIndex = 1;
 
+            var result = await ShowConf.ShowAsync();
+            if ((int)result.Id == 0)
+            {
+                // checks if data is null else inserts
+                try
+                {
+                    int idSelected = ((PersonalInfo)PersonalInfoView.SelectedItem).PersonalID;
+                    var query3 = conn.Query<PersonalInfo>("DELETE FROM PersonalInfo WHERE PersonalID ='" + idSelected + "'");
+                    Results();
+                }
+                catch (NullReferenceException)
+                {
+                    MessageDialog ClearDialog = new MessageDialog("Please select the item to Delete", "Oops..!");
+                    await ClearDialog.ShowAsync();
+                }
+            }
+            else
+            {
+                //
+            }
+            
+        }
         int selected;
+
+
+
 
         private  void AcceptChange_Click(object sender, RoutedEventArgs e)
         {
