@@ -57,9 +57,14 @@ namespace StartFinance.ViewModels
         public void GotoAbout() =>
             NavigationService.Navigate(typeof(Views.SettingsPage), 2);
 
+<<<<<<< HEAD
         public void GoToShoppingList() =>
             NavigationService.Navigate(typeof(Views.ShoppingListPage), 3);
 
+=======
+        public void GotoAppointment() =>
+            NavigationService.Navigate(typeof(Views.AppointmentPage), 4);
+>>>>>>> remotes/origin/feat_Appointments_1.0
     }
 }
 
