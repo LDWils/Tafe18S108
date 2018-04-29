@@ -52,6 +52,8 @@ namespace StartFinance.Views
 
         private async void AddShopItem_Click(object sender, RoutedEventArgs e)
         {
+            double TempPriceQuote = 0;
+
             try
             {
                 if (_ShopName.Text.ToString() == "")
@@ -61,7 +63,16 @@ namespace StartFinance.Views
                 }
                 else
                 {
-                    double TempPriceQuote = Convert.ToDouble(PriceQuote.Text);
+                    try
+                    {
+                        TempPriceQuote = Convert.ToDouble(PriceQuote.Text);
+                    }
+                    catch(FormatException theException)
+                    {
+                        MessageDialog errDialog = new MessageDialog("Invalid Price entered " + theException);
+                        await errDialog.ShowAsync();
+                        return;
+                    }
                     string CDay = _ShoppingDate.Date.Day.ToString();
                     string CMonth = _ShoppingDate.Date.Month.ToString();
                     string CYear = _ShoppingDate.Date.Year.ToString();
@@ -122,49 +133,86 @@ namespace StartFinance.Views
             }
         }
 
-        private async void EditShopItem_Click(object sender, RoutedEventArgs e)
+        private void EditShopItem_Click(object sender, RoutedEventArgs e)
         {
-            try
+            DisplayEditFileDialog();
+            
+        }
+
+        private async void DisplayEditFileDialog()
+        {
+            ContentDialog editFileDialog = new ContentDialog
             {
-                string AccSelectionEdit = ((ShoppingList)ShoppingListView.SelectedItem).NameOfItem;
-                if (AccSelectionEdit == "")
+                Title = "Edit the selected entry?",
+                Content = "This will permenantly edit the entry, Are you sure you want to continue?",
+                PrimaryButtonText = "Edit",
+                SecondaryButtonText = "Cancel"
+            };
+
+            ContentDialogResult result = await editFileDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                double PQuote = 0;
+
+                try
                 {
-                    MessageDialog dialog = new MessageDialog("No  selected Item", "Oops..!");
-                    await dialog.ShowAsync();
-                }
-                else
-                {
-                    if (_NameOfItem.Text == "")
+                    string AccSelectionEdit = ((ShoppingList)ShoppingListView.SelectedItem).NameOfItem;
+                    if (AccSelectionEdit == "")
                     {
-                        MessageDialog dialog = new MessageDialog("Name of item not entered", "Oops..!");
+                        MessageDialog dialog = new MessageDialog("No  selected Item", "Oops..!");
                         await dialog.ShowAsync();
                     }
                     else
                     {
-                        conn.CreateTable<ShoppingList>();
-                        var query1 = conn.Table<ShoppingList>();
-                        string SName = _ShopName.Text;
-                        string IName = _NameOfItem.Text;
-                        double PQuote = Convert.ToDouble(PriceQuote.Text);
-                        string CDay = _ShoppingDate.Date.Day.ToString();
-                        string CMonth = _ShoppingDate.Date.Month.ToString();
-                        string CYear = _ShoppingDate.Date.Year.ToString();
-                        string FinalDate = "" + CMonth + "/" + CDay + "/" + CYear;
-                        var query3 = conn.Query<ShoppingList>("UPDATE ShoppingList SET ShopName ='" +
-                                                                _ShopName.Text + "'" + ", NameOfItem ='" +
-                                                                _NameOfItem.Text + "'" + ", PriceQuoted ='" +
-                                                                PQuote + "'" + ", ShoppingDate ='" +
-                                                                FinalDate + "'" + " WHERE NameOfItem ='" +
-                                                                AccSelectionEdit + "'");
-                        ShoppingListView.ItemsSource = query1.ToList();
+                        if (_NameOfItem.Text == "")
+                        {
+                            MessageDialog dialog = new MessageDialog("Name of item not entered", "Oops..!");
+                            await dialog.ShowAsync();
+                        }
+                        else
+                        {
+                            conn.CreateTable<ShoppingList>();
+                            var query1 = conn.Table<ShoppingList>();
+                            string SName = _ShopName.Text;
+                            string IName = _NameOfItem.Text;
+                            try
+                            {
+                                PQuote = Convert.ToDouble(PriceQuote.Text);
+                            }
+                            catch (FormatException theException)
+                            {
+                                MessageDialog errDialog = new MessageDialog("Invalid Price entered " + theException);
+                                await errDialog.ShowAsync();
+                                return;
+                            }
+
+                            string CDay = _ShoppingDate.Date.Day.ToString();
+                            string CMonth = _ShoppingDate.Date.Month.ToString();
+                            string CYear = _ShoppingDate.Date.Year.ToString();
+                            string FinalDate = "" + CMonth + "/" + CDay + "/" + CYear;
+                            var query3 = conn.Query<ShoppingList>("UPDATE ShoppingList SET ShopName ='" +
+                                                                    _ShopName.Text + "'" + ", NameOfItem ='" +
+                                                                    _NameOfItem.Text + "'" + ", PriceQuoted ='" +
+                                                                    PQuote + "'" + ", ShoppingDate ='" +
+                                                                    FinalDate + "'" + " WHERE NameOfItem ='" +
+                                                                    AccSelectionEdit + "'");
+                            ShoppingListView.ItemsSource = query1.ToList();
+
+                        }
                     }
                 }
+                catch (NullReferenceException)
+                {
+                    MessageDialog dialog = new MessageDialog("No selected Item", "Oops..!");
+                    await dialog.ShowAsync();
+                }
             }
-            catch (NullReferenceException)
+            else
             {
-                MessageDialog dialog = new MessageDialog("No selected Item", "Oops..!");
-                await dialog.ShowAsync();
+
             }
+
         }
     }
 }
