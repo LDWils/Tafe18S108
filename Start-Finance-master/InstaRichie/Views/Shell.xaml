@@ -137,36 +137,33 @@
                                Text="WishList" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-<<<<<<< HEAD
-
+            
             <!--  Shopping List button  -->
             <!-- @Author Leon Wilson-->
             <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:ShoppingListPage" 
-=======
-            <!-- Apointment button -->
-              <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:AppointmentPage" 
->>>>>>> remotes/origin/feat_Appointments_1.0
                                           AutomationProperties.Name="Jerry"
                                           >
                 <StackPanel Orientation="Horizontal">
                     <SymbolIcon Width="48" Height="48"
-<<<<<<< HEAD
                                 Symbol="Bullets" />
                     <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
                                Text="Shopping List" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
-=======
+            <!-- Apointment button -->
+            <Controls:HamburgerButtonInfo ClearHistory="True" PageType="views:AppointmentPage" 
+                                          AutomationProperties.Name="Jerry"
+                                          >
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48" Height="48"
                 		Symbol="Paste" />
                     <TextBlock Margin="12,0,0,0" VerticalAlignment="Center"
                                Text="Appointment" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
->>>>>>> remotes/origin/feat_Appointments_1.0
+            
         </Controls:HamburgerMenu.PrimaryButtons>
-        
-        
 
         <Controls:HamburgerMenu.SecondaryButtons>
             <!--  settingspage button  -->
