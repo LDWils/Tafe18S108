@@ -152,18 +152,24 @@ namespace StartFinance.Views
 
         private async void AppBarEditButton_Click(object sender, RoutedEventArgs e)
         {
-           // string Acountselection = "";
+            // string Acountselection = "";
+
+
+           // Editbtn.Visibility = Visibility.Visible;
+           // savebtn.Visibility = Visibility.Visible;
+
+
 
             try
             {
 
-              string   Acountselection = ((ContactDteails2)ContacDetailList.SelectedItem).ContactID.ToString() ;
+                string Acountselection = ((ContactDteails2)ContacDetailList.SelectedItem).ContactID.ToString();
                 ContactDteails2 myContact = ContacDetailList.SelectedItem as ContactDteails2;
-                    txtFirstName.Text = myContact.FirstName;
+                txtFirstName.Text = myContact.FirstName;
                 txtLasttName.Text = myContact.LastName;
                 txtCompanyName.Text = myContact.CompanyName;
                 txtMobilePhone.Text = myContact.MobilePhone;
-               
+
                 if (Acountselection == "")
                 {
                     var message = new MessageDialog("Select Item to edit");
@@ -175,37 +181,46 @@ namespace StartFinance.Views
                 {
                     conn.CreateTable<ContactDteails2>();
                     var quiry1 = conn.Table<ContactDteails2>();
-                    //  var quiry2 = conn.Query<ContactDteails2>("EDIT FROM ContactDitails2 WHERE ContactID=" + Acountselection);
+
                     conn.Update(new ContactDteails2
                     {
-                        FirstName = txtFirstName.Text.ToString(),
-                        LastName = txtLasttName.Text.ToString(),
-                        CompanyName = txtCompanyName.Text.ToString(),
-                        MobilePhone = txtMobilePhone.Text.ToString(),
-                        
+                        //FirstName = txtFirstName.Text.ToString(),
+                        //LastName = txtLasttName.Text.ToString(),
+                        //CompanyName = txtCompanyName.Text.ToString(),
+                        //MobilePhone = txtMobilePhone.Text.ToString(),
+
+
+
+                        FirstName = ((ContactDteails2)ContacDetailList.SelectedItem).FirstName,
+                        LastName = ((ContactDteails2)ContacDetailList.SelectedItem).LastName,
+                        CompanyName = ((ContactDteails2)ContacDetailList.SelectedItem).CompanyName,
+                        MobilePhone = ((ContactDteails2)ContacDetailList.SelectedItem).MobilePhone,
+                       
 
                     });
-                    
 
-                    
+
+                    Editbtn.Visibility = Visibility.Collapsed;
+                    savebtn.Visibility = Visibility.Visible;
+
                 }
 
 
-                }
+            }
 
-               catch (Exception)
-               {
+            catch (Exception)
+            {
                 var Messaage = new MessageDialog("Select Item");
                 await Messaage.ShowAsync();
                 return;
-               }
-         
-          
-                
-  
             }
 
-    
+
+
+
+        }
+
+
 
 
 
@@ -215,18 +230,19 @@ namespace StartFinance.Views
 
         //    {
 
-        //        //btnUpdate.Visibility = Visibility.Visible;
+        //        Editbtn.Visibility = Visibility.Visible;
+        //        savebtn.Visibility = Visibility.Visible;
 
 
-        //       // int ContactID = ((ContacDetails2)ContacDetailList.SelectedItem).t;
+        //        int ContactID = ((ContactDteails2)ContacDetailList.SelectedItem).ContactID;
 
-        //        //string firstName = ((ContacDetails2)ContacDetailList.SelectedItem).FirstName;
+        //        string firstName = ((ContactDteails2)ContacDetailList.SelectedItem).FirstName;
 
-        //        //string lastName = ((ContacDetails2)ContacDetailList.SelectedItem).LastName;
+        //        string lastName = ((ContactDteails2)ContacDetailList.SelectedItem).LastName;
 
-        //        //string companyName = ((ContacDetails2)ContacDetailList.SelectedItem).CompanyName;
+        //        string companyName = ((ContactDteails2)ContacDetailList.SelectedItem).CompanyName;
 
-        //        //string phone = ((ContacDetails2)ContacDetailList.SelectedItem).Phone;
+        //        string phone = ((ContactDteails2)ContacDetailList.SelectedItem).MobilePhone;
 
 
 
@@ -235,7 +251,7 @@ namespace StartFinance.Views
 
         //        txtFirstName.Text = "";
 
-        //       txtLasttName.Text = "";
+        //        txtLasttName.Text = "";
 
         //        txtCompanyName.Text = "";
 
@@ -254,6 +270,49 @@ namespace StartFinance.Views
         //    }
 
         //}
+
+        private void saveChange(object sender, RoutedEventArgs e)
+        {
+
+            int ID = ((ContactDteails2)ContacDetailList.SelectedItem).ContactID;
+            string firstname = txtFirstName.Text;
+            string lastname = txtLasttName.Text;
+            string Companyname = txtCompanyName.Text;
+            string mobileNo = txtMobilePhone.Text;
+
+            conn.CreateTable<ContactDteails2>();
+            var quiry1 = conn.Table<ContactDteails2>();
+            int result = conn.Update(new ContactDteails2
+            {
+                ContactID = ((ContactDteails2)ContacDetailList.SelectedItem).ContactID,
+                FirstName = firstname,
+                LastName = lastname,
+                CompanyName = Companyname,
+                MobilePhone = mobileNo,
+
+                
+
+
+            }
+           
+
+
+           );
+
+
+            txtFirstName.Text = "";
+            txtLasttName.Text = "";
+            txtCompanyName.Text = "";
+            txtMobilePhone.Text = "";
+
+
+
+        
+            Results();
+            Editbtn.Visibility = Visibility.Visible;
+            savebtn.Visibility = Visibility.Collapsed;
+
+        }
     }
     }
     

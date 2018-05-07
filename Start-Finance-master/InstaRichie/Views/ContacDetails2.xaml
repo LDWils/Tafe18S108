@@ -36,7 +36,7 @@
                     <TextBlock Text="{Binding ContactID}" Padding="0,0,15,0"/>
                     <TextBlock Text="{Binding FirstName}" Padding="0,0,15,0"/>
                     <TextBlock Text="{Binding LastName}" Padding="0,0,15,0"/>
-                    <TextBlock Text="{Binding CompanyName}"/>
+                    <TextBlock Text="{Binding CompanyName}" Padding="0,0,15,0"/>
                     <TextBlock Text="{Binding MobilePhone}"/>
                 </StackPanel>
             </Grid>
@@ -98,8 +98,9 @@
             <controls:PageHeader.PrimaryCommands>
                 <AppBarButton Icon="Add" Label="Add Contact  Detailes"  Click="AppBarButton_Click"/>
                 <AppBarButton Icon="Delete" Label="Delete Contact Details" Click="DeleteItem_Click" />
-                <AppBarButton Icon="Edit" Label="Edit Contact Details" Click="AppBarEditButton_Click"  />
-           
+                <AppBarButton Name="Editbtn" Icon="Edit" Label="Edit Contact Details" Click="AppBarEditButton_Click"  />
+                <AppBarButton x:Name="savebtn" Icon="Accept" Label="Accept Change" Click="saveChange" Visibility="Collapsed"/>
+
             </controls:PageHeader.PrimaryCommands>
         </controls:PageHeader>
 
@@ -130,7 +131,7 @@
 
                     </StackPanel>
                     <ListView x:Name="ContacDetailList" Grid.Row="1" ItemTemplate="{StaticResource TransListView}"
-                              HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="209">
+                              HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="131">
                         <RelativePanel.Below>PageStart</RelativePanel.Below>
                     </ListView>
                 </Grid>
